@@ -3,7 +3,7 @@ deepspeed \
 --master_port=29602 \
 ChatUniVi/train/train_mem.py \
 --deepspeed scripts/zero3.json \
---model_name_or_path ${LLM model path} \
+--model_name_or_path xDAN2099/xDAN-L1-7b-DeepThink-chatml-fnc-1126-e25 \
 --version v1 \
 --model_use PRETUNE \
 --dataset_use Pretrain \
@@ -13,15 +13,15 @@ ChatUniVi/train/train_mem.py \
 --mm_use_im_start_end False \
 --mm_use_im_patch_token False \
 --bf16 True \
---output_dir ${stage1 save path} \
+--output_dir /workspace/Chat-UniVi/output/pretrain-models \
 --num_train_epochs 1 \
---per_device_train_batch_size 16 \
+--per_device_train_batch_size 8 \
 --per_device_eval_batch_size 4 \
 --gradient_accumulation_steps 1 \
 --evaluation_strategy "no" \
 --save_strategy "steps" \
---save_steps 24000 \
---save_total_limit 1 \
+--save_steps 5000 \
+--save_total_limit 5 \
 --learning_rate 2e-3 \
 --weight_decay 0. \
 --warmup_ratio 0.03 \
@@ -33,3 +33,4 @@ ChatUniVi/train/train_mem.py \
 --dataloader_num_workers 4 \
 --lazy_preprocess True \
 --report_to wandb
+
